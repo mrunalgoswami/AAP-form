@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AAP Member Registration</title>
+</head>
+<body>
+    <h2>AAP Member Registration</h2>
+    <form id="form">
+        <label>Assembly Constituency</label><input name="assemblyConstituency"><br>
+        <label>Booth Number</label><input name="boothNumber"><br>
+        <label>Name</label><input name="name"><br>
+        <label>Address</label><input name="address"><br>
+        <label>Taluka/Ward</label><input name="talukaWard"><br>
+        <label>WhatsApp Number</label><input name="whatsapp"><br>
+        <label>EPIC ID</label><input name="epicId"><br>
+        <label>Date of Birth</label><input type="date" name="dob"><br>
+        <label>Form Filled By</label><input name="formFiller"><br>
+        <label>Signature</label><input name="signature"><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("form").addEventListener("submit", function(e){
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            fetch("/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(res => alert("Submitted!"));
+        });
+    </script>
+</body>
+</html>
